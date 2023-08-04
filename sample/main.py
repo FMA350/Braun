@@ -2,45 +2,26 @@
 import numpy as np
 import signal
 # Braun files
-from object import GenerateRandomObject
+from cli_controls import print_welcome
+from Universe import Universe
+from signalhandlers import PrintHandler, ExitHandler
 #from VisualEditor import VisualEditor
 
 
-def universe_tick(objects, time_delta):
-    for object in objects:
-        object.CalculateAcceleration(objects)  
-    for object in objects:
-        object.CalculateDeltaSpeed(time_delta)
-        object.CalculateDeltaPosition(time_delta)
-        #object.Display()
-
-objects = []
-
-
-class ExitHandler:
-    def __init__(self, myvar):
-        self.myattr = myvar
-    def __call__(self, signo, frame):
-        exit(myvar)
-
-class PrintHandler:
-    def __init__(self):
-        pass
-    def __call__(self, signo, frame):
-        for o in objects:
-            o.Display()
+def simple_simulation(u : Universe):
+    print ("Creating 2 objects")
+    u.createRandomObject("Venus")
+    u.createRandomObject("Mars")
+    simulation_running = True
+    while(simulation_running):
+        u.simple_universe_tick()
 
 def main():
-    print ("Creating 2 objects")
-    simulation_running = True
-    v = GenerateRandomObject("Venus")
-    m = GenerateRandomObject("Mars")
-    objects.append(v)
-    objects.append(m)
-    signal.signal(signal.SIGINT,  PrintHandler())
-    signal.signal(signal.SIGQUIT, ExitHandler(1))
-    while(simulation_running):
-        universe_tick(objects, 1)
+    print_welcome()
+    u = Universe() 
+    signal.signal(signal.SIGINT,  ExitHandler(u))
+    signal.signal(signal.SIGTSTP, PrintHandler(u))
+    simple_simulation(u)
 
 
 if __name__ == '__main__':
