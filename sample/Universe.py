@@ -16,8 +16,9 @@ class Universe:
     def slowdown(self):
          self.time_delta /= 2
 
-    def createRandomObject(self, name: str) -> None:
+    def createRandomObject(self, name: str, color: str) -> None:
         obj = GenerateRandomObject(name)
+        obj.color = color
         obj.Display()
         self.addObject(obj)
     
