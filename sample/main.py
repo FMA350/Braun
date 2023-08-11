@@ -12,7 +12,7 @@ def simple_simulation(u : Universe):
     print ("Creating 3 objects")
     u.createRandomObject("Venus", 'y')
     u.createRandomObject("Mars", 'r')
-    #u.createRandomObject("Earth", 'b')
+    u.createRandomObject("Earth", 'b')
     plotter = Simple_3d_plotter()
     simulation_running = True
     step = 0

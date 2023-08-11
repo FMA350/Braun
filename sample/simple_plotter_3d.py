@@ -9,7 +9,7 @@ class Simple_3d_plotter:
         self.ax  = self.fig.add_subplot(111, projection='3d')
         plt.ion()
         self.min_plot_limits = tuple_3(0,0,0)
-        self.max_plot_limits = tuple_3(10, 10, 10)
+        self.max_plot_limits = tuple_3(1, 1, 1)
         self.points = []
         
 

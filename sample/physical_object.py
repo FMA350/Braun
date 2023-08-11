@@ -84,11 +84,11 @@ class Object_with_mass:
         self._update_trail_data()
 
 def GenerateRandomObject(name) -> Object_with_mass:
-    position_seed = random.randint(10)
+    position_seed = random.randint(0.1, 2)
     position = random.rand(3) * position_seed
-    speed_seed = random.randint(10)
+    speed_seed = random.randint(0.1, 1)
     speed    = random.rand(3) * speed_seed
-    mass_seed = random.randint(10000000, 100000000)
+    mass_seed = random.randint(1000000, 100000000)
     mass = random.rand(1) * mass_seed
     return Object_with_mass(name, tuple_3(position[0],position[1],position[2]), tuple_3(speed[0],speed[1],speed[2]), mass)
     #return Object_with_mass(name, tuple_3(position[0],position[1],position[2]), tuple_3(0,0,0), mass)
